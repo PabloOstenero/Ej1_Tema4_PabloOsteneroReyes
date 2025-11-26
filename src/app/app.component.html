@@ -1,3 +1,8 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<nav class="navbar">
+  <a routerLink="/terremotos" routerLinkActive="active">Terremotos (USGS)</a>
+  <a routerLink="/api" routerLinkActive="active">Mi API (Render)</a>
+</nav>
+
+<main class="container">
+  <router-outlet />
+</main>

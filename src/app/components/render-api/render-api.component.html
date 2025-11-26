@@ -1,0 +1,29 @@
+<h1>Mi API en Render (Spring Boot)</h1>
+
+<img class="responsive" src="assets/otra.jpg" alt="Luna" style="max-width: 300px; height: auto; display: block; margin: 0 auto 16px auto;">
+
+<p>
+  Esta página consulta tu API de Spring Boot desplegada en Render.
+</p>
+
+<div style="display:flex; gap:12px; flex-wrap: wrap; margin-bottom: 16px;">
+  <button class="button" (click)="cargarAutores()" [disabled]="loading">
+    {{ loading ? 'Cargando...' : 'Cargar Autores' }}
+  </button>
+  <button class="button" (click)="cargarLibros()" [disabled]="loading">
+    {{ loading ? 'Cargando...' : 'Cargar Libros' }}
+  </button>
+</div>
+
+<div class="card" *ngIf="currentEndpoint" style="font-size: 14px; color: #6b7280;">
+  <strong>Endpoint actual:</strong> {{ currentEndpoint }}
+</div>
+
+<div class="card" *ngIf="error">
+  <strong>Error:</strong> {{ error }}
+</div>
+
+<div class="card" *ngIf="data as d">
+  <h3 style="margin-top:0;">Respuesta</h3>
+  <pre style="white-space:pre-wrap; word-break:break-word; margin:0; max-height: 400px; overflow-y: auto; padding: 12px; background-color: #f9fafb; border-radius: 6px;">{{ d | json }}</pre>
+</div>

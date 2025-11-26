@@ -35,3 +35,14 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Permitir scroll en toda la página */
+html, body {
+  height: auto !important;
+  overflow: auto !important;
+}
+
+ion-app {
+  height: auto !important;
+  overflow: visible !important;
+}

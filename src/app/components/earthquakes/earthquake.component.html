@@ -1,0 +1,39 @@
+<h1>Último Terremoto (USGS)</h1>
+
+<img class="responsive" src="assets/tierra.jpg" alt="Planeta Tierra" style="max-width: 300px; height: auto; display: block; margin: 0 auto 16px auto;">
+
+<p>
+  Esta página consulta la API pública de USGS para obtener el último terremoto registrado.
+</p>
+
+<button class="button" (click)="cargarUltimo()" [disabled]="loading">
+  {{ loading ? 'Cargando...' : 'Cargar último terremoto' }}
+</button>
+
+<div class="card" *ngIf="error">
+  <strong>Error:</strong> {{ error }}
+</div>
+
+<div class="card" *ngIf="latest as e">
+  <h2 style="margin-top:0;">{{ e.properties.title }}</h2>
+  <ul>
+    <li><strong>Magnitud:</strong> {{ e.properties.mag ?? 'N/D' }}</li>
+    <li><strong>Lugar:</strong> {{ e.properties.place ?? 'N/D' }}</li>
+    <li><strong>Fecha/Hora (UTC):</strong>
+      <ng-container *ngIf="toDate(e.properties.time) as d; else nodate">
+        {{ d | date:'medium':'UTC' }}
+      </ng-container>
+      <ng-template #nodate>N/D</ng-template>
+    </li>
+    <li><strong>Tsunami:</strong> {{ e.properties.tsunami ? 'Sí' : 'No' }}</li>
+    <li><strong>Profundidad (km):</strong>
+      <ng-container *ngIf="e.geometry && e.geometry.coordinates && e.geometry.coordinates.length === 3; else nodepth">
+        {{ e.geometry.coordinates[2] | number : '1.0-2' }}
+      </ng-container>
+      <ng-template #nodepth>N/D</ng-template>
+    </li>
+    <li *ngIf="e.properties.url">
+      <a [href]="e.properties.url" target="_blank" rel="noopener">Más detalles (USGS)</a>
+    </li>
+  </ul>
+</div>

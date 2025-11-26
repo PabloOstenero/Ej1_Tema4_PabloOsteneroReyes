@@ -1,13 +1,10 @@
 import { Routes } from '@angular/router';
+import { EarthquakesComponent } from './components/earthquakes/earthquake.component';
+import { RenderApiComponent } from './components/render-api/render-api.component';
 
 export const routes: Routes = [
-  {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
+  { path: '', redirectTo: 'terremotos', pathMatch: 'full' },
+  { path: 'terremotos', component: EarthquakesComponent, title: 'Último terremoto' },
+  { path: 'api', component: RenderApiComponent, title: 'API Render' },
+  { path: '**', redirectTo: 'terremotos' },
 ];
